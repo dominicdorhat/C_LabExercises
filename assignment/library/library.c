@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct book {
     char *title;
@@ -22,7 +23,9 @@ void addbook(library *thislib);
 int main () {
     int choice, valid_input;
     unsigned int updates;
-    char st[1024], title_input[CHARLIMIT];
+    char st[1024];
+    char title_input[100], author_input[100], subject_input[100];
+    char test1[100], test2[100], test3[100];
 
     book Book;
 
@@ -35,17 +38,42 @@ int main () {
 
         switch(choice) {
             case 1:
-                printf("Enter title: ");
-                
-                if(fgets(title_input, sizeof(title_input), stdin)!= NULL) {
-                    sscanf(title_input, "%s", Book.title);
+                valid_input = 0;
+                while (1) {
+                    printf("Enter title: ");
+                    fgets(title_input, sizeof(title_input), stdin);
+                    printf("Enter author: ");
+                    fgets(author_input, sizeof(author_input), stdin);
+                    printf("Enter subject: ");
+                    fgets(subject_input, sizeof(subject_input), stdin);
 
-                } else {
-                    puts("Book title too long");
+                    if (strlen(title_input) <= CHARLIMIT ) {                        
+                        sscanf(title_input, "%s", test1);
+                        printf("%s\n", test1);            
+                        // TODO: Check for existing title             
+                    } else {
+                        printf("Book title too long! \n");
+                        break;
+                    }
+
+                    if (strlen(author_input) <= CHARLIMIT ){
+                        sscanf(author_input, "%s", test2);
+                        printf("%s\n", test2);
+                    } else {
+                        printf("Book author too long!\n");
+                        break;
+                    }
+
+                    if (strlen(subject_input) <= CHARLIMIT ){
+                        sscanf(subject_input, "%s", test3);
+                        printf("%s\n", test3);
+                    } else {
+                        printf("Subject name too long!\n");
+                        break;
+                    }
+                    break;
                 }
-                
-                printf("Enter author: ");
-                printf("Enter subject: ");
+                printf("pass\n");                
                 break;
             case 2:
                 printf("pass2\n");
