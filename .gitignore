@@ -1,4 +1,5 @@
-assignment
 *.exe
 .vscode/
 bin/
+assessment
+*.txt
